@@ -1,5 +1,6 @@
 import json
 import aiml
+import speak
 
 print("請輸入訂餐內容: \r\n"
       "範例: 排骨便當{數字}個 {姓名} \r\n"
@@ -24,16 +25,16 @@ while True:
             resJson = json.loads(str(res))
             pork_num = resJson["pork"]
             chicken_num = resJson["chicken"]
-            total = (meals["pork"] * pork_num) + (meals["pork"] * chicken_num)
+            total = (meals["pork"] * pork_num) + (meals["chicken"] * chicken_num)
             text = "總金額為"
             if resJson["pork"] > 0:
-                text += "排骨便當" + str(meals["pork"]) + "元 共" + str(resJson["pork"]) + "個 "
+                text += str(resJson["pork"]) + "個排骨便當 一個" + str(meals["pork"]) + "元"
 
             if resJson["chicken"] > 0:
-                text += "雞腿便當" + str(meals["chicken"]) + "元" + str(resJson["chicken"]) + "個"
+                text +=  str(resJson["chicken"]) + "個雞腿便當 一個" + str(meals["chicken"]) + "元"
 
-            text += "共" + str(total)
-            print(text)
+            text += "共" + str(resJson["pork"] + resJson["chicken"]) + "個便當 金額為" + str(total) + "元"
+            speak.text_to_speek(text)
 
         else:
             kernal.respond(req)
@@ -47,6 +48,6 @@ while True:
             if resJson["chicken"] > 0:
                 text += "雞腿便當" + str(resJson["chicken"]) + "個"
 
-            print(text)
+            speak.text_to_speek(text)
     except:
-        print("something wrong!")
+        speak.text_to_speek("something wrong!")
