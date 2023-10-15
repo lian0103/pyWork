@@ -1,0 +1,51 @@
+<aiml version="1.0.1" encoding="UTF-8">
+    <category>
+        <pattern>排骨便當 * 個 *</pattern>
+
+        <template>
+            <set name="pork">
+                <star index="1"/>
+            </set>
+            <set name="username">
+                <star index="2"/>
+            </set>
+            {"chicken":<get name="chicken"/>,"pork":<get name="pork"/>,"username":"<get
+                name="username"/>"}
+        </template>
+    </category>
+    <category>
+        <pattern>雞腿便當 * 個 *</pattern>
+        <template>
+
+            <set name="chicken">
+                <star index="1"/>
+            </set>
+            <set name="username">
+                <star index="2"/>
+            </set>
+        </template>
+    </category>
+    <category>
+        <pattern>初始化</pattern>
+        <template>
+            <condition name="chicken">
+                <li value="">
+                    <set name="chicken">0</set>
+                </li> <!-- 如果 pork 變數未設置，則設定為預設值 0 -->
+            </condition>
+            <condition name="pork">
+                <li value="">
+                    <set name="pork">0</set>
+                </li> <!-- 如果 pork 變數未設置，則設定為預設值 0 -->
+            </condition>
+        </template>
+    </category>
+    <category>
+        <pattern>當前訂單</pattern>
+        <template>
+            {"chicken":<get name="chicken"/>,"pork":<get name="pork"/>,"username":"<get
+                name="username"/>"}
+        </template>
+    </category>
+
+</aiml>
